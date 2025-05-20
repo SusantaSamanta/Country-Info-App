@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e2127;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #container {
+            height: 650px;
+            width: 500px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+
+        #inputSection {
+            height: 40px;
+            width: 100%;
+            border: none;
+            display: grid;
+            grid-template-columns: 1fr .15fr;
+        }
+
+        #inputContainer {
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #inputBox {
+            width: 100%;
+            height: 40px;
+            padding-inline: 35px;
+            font-size: 18px;
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 20px 0px 0px 20px;
+        }
+
+        #suggestionCont {
+            width: 100%;
+            max-height: 235px;
+            height: fit-content;
+            padding-inline: 35px;
+            padding-block: 10px;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            display: none;
+            top: 42px;
+            left: 0px;
+            border: 1px solid gray;
+            position: absolute;
+            border-radius: 10px;
+            list-style: none;
+            font-size: 16px;
+        }
+
+        #suggestionCont li {
+            margin-block: 2px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            height: 25px;
+        }
+
+        #suggestionCont li:hover {
+            background: #e9e9e9;
+        }
+
+        #searchBtn {
+            height: 40px;
+            color: gray;
+            --searchBorder: 1px solid gray;
+            background: #f8f8f8;
+            border-top: var(--searchBorder);
+            border-bottom: var(--searchBorder);
+            border-right: var(--searchBorder);
+            border-left: 0px;
+            border-radius: 0px 20px 20px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #searchBtn i {
+            position: relative;
+            top: 1px;
+            transform: scale(1.5);
+        }
+
+        #searchBtn i:hover {
+            transform: scale(1.8);
+            color: rgb(78, 78, 78);
+        }
+    </style>
+</head>
+
+<body>
+    <section id="container">
+        <div id="inputSection">
+            <div id="inputContainer">
+                <input id="inputBox">
+                <ul id="suggestionCont">
+                    <!-- <li>India</li>
+                    <li>Nepal</li> -->
+                </ul>
+            </div>
+            <button id="searchBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+    </section>
+
+
+    <script>
+
+
+        let inputBox = document.getElementById("inputBox");
+
+        let storeName = [];
+
+        let nameArr = ["Susanta", "Suman", "utpal", "ahin", "Sujoy", "raj", "rabi", "mohan", "monu", "sanu", "tonon"]
+        let suggestionCont = document.getElementById("suggestionCont");
+
+        const searchResult = (event) => {
+
+            storeName = [];
+            let value = inputBox.value;
+            let liTag = '';
+
+            for (name of nameArr) {
+                if (name.toLowerCase().includes(value.toLowerCase()))
+                    storeName.push(name);
+            }
+            if (storeName.length == 0) {
+                suggestionCont.style.cssText = "display: none;"
+            }
+            else {
+                suggestionCont.style.cssText = "display: block;"
+                for (name of storeName)
+                    liTag += `<li>${name}</li>`;
+
+                suggestionCont.innerHTML = liTag;
+            }
+        }
+
+        inputBox.addEventListener('input', searchResult)
+
+
+
+        let inputFocus = 0;
+        inputBox.addEventListener('focus', () => {
+            inputFocus++;
+            console.log(inputFocus)
+            if(inputFocus > 1)
+                suggestionCont.style.cssText = "display: block;"
+            inputBox.style.cssText = "border: 1px solid #1c62b9;";
+        });
+        inputBox.addEventListener('blur', () => {
+            suggestionCont.style.cssText = "display: none;"
+            inputBox.style.cssText = "border: 1px solid gray;"
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
