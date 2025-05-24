@@ -26,14 +26,15 @@
         }
 
         #container {
-            height: 650px;
+            height: 550px;
             width: 500px;
             padding: 40px;
             background-color: white;
             border-radius: 20px;
             display: flex;
-            justify-content: center;
-            /* align-items: center; */
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
         }
 
         #inputSection {
@@ -81,6 +82,10 @@
             font-size: 16px;
         }
 
+        .nameLi {
+            color: red;
+        }
+
         #suggestionCont li {
             margin-block: 2px;
             display: flex;
@@ -118,6 +123,39 @@
             transform: scale(1.8);
             color: rgb(78, 78, 78);
         }
+        #imageSection{
+            height: 250px;
+            width: 100%;
+            margin-block: 40px;
+            border: 1px solid red;
+        }
+        #imageSection {
+            height: 250px;
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            border: 0px solid red;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                margin-top: 25px;
+            }
+        }
+        #countryFlagImage {
+            max-width: 82%;
+            max-height: 80%;
+            box-shadow: 2px 2px 8px gray;
+            border-radius: 8px;
+            transition: all 0.1s ease-in;
+        }
+        #countryFlagImage:hover{
+            transform: scale(1.02);
+            box-shadow: 2px 2px 20px 8px #a0a0a0;
+        }
+
     </style>
 </head>
 
@@ -125,29 +163,92 @@
     <section id="container">
         <div id="inputSection">
             <div id="inputContainer">
-                <input id="inputBox">
+                <input id="inputBox" placeholder="Search">
                 <ul id="suggestionCont">
-                    <!-- <li>India</li>
-                    <li>Nepal</li> -->
+                    <!-- <li class="nameLI">India</li>
+                    <li class="nameLI">Nepal</li> -->
                 </ul>
             </div>
             <button id="searchBtn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
+        <div id="imageSection">
+            <img id="countryFlagImage" src="india.jpg">
 
+        </div>
     </section>
-
-
+    
+    
     <script>
-
-
+        
+        
         let inputBox = document.getElementById("inputBox");
+        let suggestionCont = document.getElementById("suggestionCont");
+        let searchBtn = document.getElementById('searchBtn');
+
+
 
         let storeName = [];
+        //let nameArr = ["Susanta", "Suman", "utpal", "ahin", "Sujoy", "raj", "rabi", "mohan", "monu", "sanu", "tonon"]
+        
+        const nameArr = [
+            "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa",
+            "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua & Barbuda",
+            "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia",
+            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+            "Barbados", "Belarus", "Belgium", "Belize", "Benin",
+            "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana",
+            "Brazil", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria",
+            "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada",
+            "Canary Islands", "Cape Verde", "Caribbean Netherlands", "Cayman Islands", "Central African Republic",
+            "Ceuta & Melilla", "Chad", "Chile", "China", "Christmas Island",
+            "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo - Brazzaville", "Congo - Kinshasa",
+            "Cook Islands", "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba",
+            "Curaçao", "Cyprus", "Czechia", "Denmark", "Diego Garcia",
+            "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
+            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
+            "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland",
+            "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon",
+            "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar",
+            "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam",
+            "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana",
+            "Haiti", "Honduras", "Hong Kong SAR China", "Hungary", "Iceland",
+            "India", "Indonesia", "Iran", "Iraq", "Ireland",
+            "Isle of Man", "Israel", "Italy", "Jamaica", "Japan",
+            "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+            "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+            "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
+            "Lithuania", "Luxembourg", "Macao SAR China", "Madagascar", "Malawi",
+            "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+            "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico",
+            "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro",
+            "Montserrat", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia",
+            "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand",
+            "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
+            "North Korea", "North Macedonia", "Northern Mariana Islands", "Norway", "Oman",
+            "Pakistan", "Palau", "Palestinian Territories", "Panama", "Papua New Guinea",
+            "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland",
+            "Portugal", "Puerto Rico", "Qatar", "Réunion", "Romania",
+            "Russia", "Rwanda", "Samoa", "San Marino", "São Tomé & Príncipe",
+            "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
+            "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands",
+            "Somalia", "South Africa", "South Georgia & South Sandwich Islands", "South Korea", "South Sudan",
+            "Spain", "Sri Lanka", "St. Barthélemy", "St. Helena", "St. Kitts & Nevis",
+            "St. Lucia", "St. Martin", "St. Pierre & Miquelon", "St. Vincent & Grenadines", "Sudan",
+            "Suriname", "Svalbard & Jan Mayen", "Sweden", "Switzerland", "Syria",
+            "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste",
+            "Togo", "Tokelau", "Tonga", "Trinidad & Tobago", "Tunisia",
+            "Turkey", "Turkmenistan", "Turks & Caicos Islands", "Tuvalu", "U.S. Outlying Islands",
+            "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
+            "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
+            "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara", "Yemen",
+            "Zambia", "Zimbabwe"
+        ];
 
-        let nameArr = ["Susanta", "Suman", "utpal", "ahin", "Sujoy", "raj", "rabi", "mohan", "monu", "sanu", "tonon"]
-        let suggestionCont = document.getElementById("suggestionCont");
+
+
+
 
         const searchResult = (event) => {
 
@@ -156,8 +257,10 @@
             let liTag = '';
 
             for (name of nameArr) {
-                if (name.toLowerCase().includes(value.toLowerCase()))
+                // if (name.toLowerCase().includes(value.toLowerCase()))
+                if (name.toLowerCase().startsWith(value.toLowerCase()))
                     storeName.push(name);
+
             }
             if (storeName.length == 0) {
                 suggestionCont.style.cssText = "display: none;"
@@ -169,24 +272,39 @@
 
                 suggestionCont.innerHTML = liTag;
             }
-        }
 
+        }
         inputBox.addEventListener('input', searchResult)
 
+
+
+        suggestionCont.addEventListener('click', (event) => {
+            if (event.target) {
+                inputBox.value = event.target.innerText; 
+                suggestionCont.style.display = 'none';  
+            }
+        });
 
 
         let inputFocus = 0;
         inputBox.addEventListener('focus', () => {
             inputFocus++;
-            console.log(inputFocus)
-            if(inputFocus > 1)
+            if (inputFocus > 1)
                 suggestionCont.style.cssText = "display: block;"
             inputBox.style.cssText = "border: 1px solid #1c62b9;";
-        });
+
+        })
         inputBox.addEventListener('blur', () => {
-            suggestionCont.style.cssText = "display: none;"
+            setTimeout(() => {
+                suggestionCont.style.cssText = "display: none;";
+            },100)
             inputBox.style.cssText = "border: 1px solid gray;"
-        });
+        })
+
+        const searchFun = () => {
+            console.log('ok')
+        }
+        searchBtn.addEventListener('click', searchFun);
 
 
 
