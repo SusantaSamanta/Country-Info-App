@@ -21,7 +21,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #17191c;
+            background-color: #141517;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -64,7 +64,7 @@
             border: 1px solid gray;
             border-radius: 20px 0px 0px 20px;
         }
-        
+
         #suggestionCont {
             width: 100%;
             max-height: 235px;
@@ -78,6 +78,7 @@
             left: 0px;
             border: 1px solid rgb(205, 205, 205);
             position: absolute;
+            z-index: 1;
             border-radius: 10px;
             list-style: none;
             font-size: 16px;
@@ -85,11 +86,11 @@
             background: #ffffff50;
             box-shadow: 2px 2px 10px gray;
         }
-        
+
         .nameLi {
             color: red;
         }
-        
+
         #suggestionCont li {
             width: 100%;
             margin-block: 2px;
@@ -99,12 +100,12 @@
             cursor: pointer;
             height: 25px;
         }
-        
+
         #suggestionCont li:hover {
             /* backdrop-filter: blur(10px); */
             background: #b5b5b535;
         }
-        
+
         #searchBtn {
             height: 40px;
             color: #aeaeae;
@@ -130,7 +131,8 @@
             transform: scale(1.8);
             color: #6f6f6f;
         }
-        #imageSection{
+
+        #imageSection {
             height: 250px;
             width: 100%;
             margin-top: 30px;
@@ -138,30 +140,43 @@
             border: 0px solid red;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            h1{
+            position: relative;
+            h1 {
+                position: absolute;
+                bottom: -1%;
                 margin-top: 25px;
             }
         }
-        #countryFlagImage{
+
+        #countryFlagImage {
             max-width: 82%;
             max-height: 80%;
             box-shadow: 2px 2px 8px gray;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: all 0.1s ease-in;
         }
-        #countryDetails{
+
+        #countryFlagImage:hover {
+            transform: scale(1.01);
+            box-shadow: 2px 2px 15px 6px #a0a0a0;
+        }
+
+        #countryDetails {
             min-height: 130px;
             width: 100%;
             /* margin-top: 30px; */
-            padding-inline: 35px;
-            border: 0px solid red;
-            row-gap: 7px;
-            column-gap: 7px;
+            padding-left: 35px;
+            padding-right: 25px;
+            border: 00px solid red;
+            row-gap: 8px;
+            column-gap: 4px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            p{
+
+            p {
                 height: 35px;
                 min-width: fit-content;
                 padding-inline: 20px;
@@ -173,38 +188,115 @@
                 background: #e0e0e0;
                 letter-spacing: 1px;
                 font-size: 14px;
+                font-weight: 500;
                 /* margin-top: 20px; */
+                border: 0.5px solid white;
+            }
+
+            p:hover {
+                border: 0.5px solid #bbbbbb;
             }
         }
 
-
-
-
-
-
-
-
-
-
-        #bodyBackground{
+        #bodyBackground {
             height: 60%;
             width: 40%;
             position: absolute;
             bottom: 15%;
             z-index: -2;
-            /* background: url("india.jpg"); */
+            background: url("india.jpg");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             filter: opacity(50%);
             border: 0px solid red;
         }
-        #bodyBackgroundTop{
+
+        #bodyBackgroundTop {
             height: 100%;
             width: 100%;
             backdrop-filter: blur(80px);
             position: absolute;
             z-index: -1;
+        }
+
+
+
+
+        @media screen and (max-width: 900px) {
+            #bodyBackground {
+                height: 30%;
+                width: 70%;
+                position: absolute;
+                bottom: 30%;
+                z-index: -2;
+            }
+
+            #bodyBackgroundTop {
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(80px);
+                position: absolute;
+                z-index: -1;
+            }
+
+        }
+
+        @media screen and (max-width: 550px) {
+            body {
+                background: white;
+                align-items: flex-start;
+            }
+
+            #container {
+                height: 90vh;
+                width: 100vw;
+                padding: 20px;
+                padding-top: 40px;
+            }
+
+            #imageSection {
+                height: 280px;
+                width: 100%;
+                margin-top: 35px;
+                margin-bottom: 35px;
+                border: 0px solid red;
+                h1 {
+                    font-size: 30px;
+                    margin-top: 30px;
+                }
+            }
+            #countryFlagImage {
+                max-width: 98%;
+                max-height: 70%;
+                border-radius: 6px;
+            }
+            #countryFlagImage:hover {
+                transform: scale(1);
+                box-shadow: 2px 2px 8px gray;
+            }
+
+            #countryDetails {
+                min-height: 130px;
+                width: 100%;
+                /* margin-top: 30px; */
+                padding-left: 5px;
+                padding-right: 5px;
+                border: 0px solid red;
+                row-gap: 10px;
+                column-gap: 4px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+
+                p {
+                    height: 40px;
+                    min-width: fit-content;
+                    padding-inline: 20px;
+                    border-radius: 20px;
+                    font-size: 16px;
+                }
+            }
         }
     </style>
 </head>
@@ -226,15 +318,18 @@
         </div>
 
         <div id="imageSection">
-            <img id="countryFlagImage" src="india.jpg">
+            <img id="countryFlagImage" src="https://flagcdn.com/in.svg">
             <h1 id="countryHeading">INDIA</h1>
         </div>
 
         <div id="countryDetails">
+            <p id="countryName">Country Name: New Delhi</p>
             <p id="capital">Capital: New Delhi</p>
             <p id="continent">Continent: Asia</p>
-            <p id="population">Population: 12345678</p>
             <p id="currency">Currency: Indian rupee - INR</p>
+            <p id="isd">ISD: +91</p>
+            <p id="cctld">ccTLD: .in</p>
+            <p id="population">Population: 12345678</p>
             <p id="language">language: English, Hindi, Tamil</p>
         </div>
 
@@ -244,12 +339,12 @@
 
     <div id="bodyBackground"></div>
     <div id="bodyBackgroundTop"></div>
-    
-    
-    
+
+
+
     <script>
-        
-        
+
+
         let inputBox = document.getElementById("inputBox");
         let suggestionCont = document.getElementById("suggestionCont");
         let searchBtn = document.getElementById('searchBtn');
@@ -257,63 +352,26 @@
 
 
         let storeName = [];
-        //let nameArr = ["Susanta", "Suman", "utpal", "ahin", "Sujoy", "raj", "rabi", "mohan", "monu", "sanu", "tonon"]
-        
-        const nameArr = [
-            "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa",
-            "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua & Barbuda",
-            "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia",
-            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
-            "Barbados", "Belarus", "Belgium", "Belize", "Benin",
-            "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana",
-            "Brazil", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria",
-            "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada",
-            "Canary Islands", "Cape Verde", "Caribbean Netherlands", "Cayman Islands", "Central African Republic",
-            "Ceuta & Melilla", "Chad", "Chile", "China", "Christmas Island",
-            "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo - Brazzaville", "Congo - Kinshasa",
-            "Cook Islands", "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba",
-            "Curaçao", "Cyprus", "Czechia", "Denmark", "Diego Garcia",
-            "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
-            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
-            "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland",
-            "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon",
-            "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar",
-            "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam",
-            "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana",
-            "Haiti", "Honduras", "Hong Kong SAR China", "Hungary", "Iceland",
-            "India", "Indonesia", "Iran", "Iraq", "Ireland",
-            "Isle of Man", "Israel", "Italy", "Jamaica", "Japan",
-            "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
-            "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
-            "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
-            "Lithuania", "Luxembourg", "Macao SAR China", "Madagascar", "Malawi",
-            "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
-            "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico",
-            "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro",
-            "Montserrat", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia",
-            "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand",
-            "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
-            "North Korea", "North Macedonia", "Northern Mariana Islands", "Norway", "Oman",
-            "Pakistan", "Palau", "Palestinian Territories", "Panama", "Papua New Guinea",
-            "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland",
-            "Portugal", "Puerto Rico", "Qatar", "Réunion", "Romania",
-            "Russia", "Rwanda", "Samoa", "San Marino", "São Tomé & Príncipe",
-            "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
-            "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands",
-            "Somalia", "South Africa", "South Georgia & South Sandwich Islands", "South Korea", "South Sudan",
-            "Spain", "Sri Lanka", "St. Barthélemy", "St. Helena", "St. Kitts & Nevis",
-            "St. Lucia", "St. Martin", "St. Pierre & Miquelon", "St. Vincent & Grenadines", "Sudan",
-            "Suriname", "Svalbard & Jan Mayen", "Sweden", "Switzerland", "Syria",
-            "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste",
-            "Togo", "Tokelau", "Tonga", "Trinidad & Tobago", "Tunisia",
-            "Turkey", "Turkmenistan", "Turks & Caicos Islands", "Tuvalu", "U.S. Outlying Islands",
-            "U.S. Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
-            "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
-            "Venezuela", "Vietnam", "Wallis & Futuna", "Western Sahara", "Yemen",
-            "Zambia", "Zimbabwe"
-        ];
 
 
+        ////////////////////     this part for retrieve all name fro the api   /////////////////////////
+        let countryNameArr = [];
+        const fetchCountryName = async () => {
+            try {
+                let res = await fetch('https://restcountries.com/v3.1/all');
+                let data = await res.json();
+                for (index in data) {
+                    countryNameArr[index] = data[index].name.common;
+                }
+                // console.log(countryNameArr);
+            }
+            catch (err) {
+                countryNameArr = ['India', 'Nepal', 'China'];
+                window.alert("Search Suggestion not working properly")
+                console.log("Captain", err);
+            }
+        }
+        fetchCountryName();
 
 
 
@@ -323,18 +381,16 @@
             let value = inputBox.value;
             let liTag = '';
 
-            for (name of nameArr) {
-                // if (name.toLowerCase().includes(value.toLowerCase()))
-                if (name.toLowerCase().startsWith(value.toLowerCase()))
+            for (name of countryNameArr)
+                if (name.toLowerCase().startsWith(value.toLowerCase())) // for every letter input in inputBox, each time input.value is startWith those value in country arr they will push in to the storeName arr
                     storeName.push(name);
 
-            }
-            if (storeName.length == 0) {
+            if (storeName.length == 0) {  //// if no suggestion present then suggestion list hide
                 suggestionCont.style.cssText = "display: none;"
             }
-            else {
+            else {                        ////  if suggestion present then show 
                 suggestionCont.style.cssText = "display: block;"
-                for (name of storeName)
+                for (name of storeName)   // after receiving all name list suggestion are generate
                     liTag += `<li>${name}</li>`;
 
                 suggestionCont.innerHTML = liTag;
@@ -344,15 +400,16 @@
         inputBox.addEventListener('input', searchResult)
 
 
-
+        ///////////  this part for click event for all list suggestion     ////////////
         suggestionCont.addEventListener('click', (event) => {
             if (event.target) {
-                inputBox.value = event.target.innerText; 
-                suggestionCont.style.display = 'none';  
+                inputBox.value = event.target.innerText;
+                searchFun();
+                suggestionCont.style.display = 'none';
             }
         });
 
-
+        ///////////    this part for inputBox focus or not and the corresponding action     ///////////////
         let inputFocus = 0;
         inputBox.addEventListener('focus', () => {
             inputFocus++;
@@ -364,12 +421,54 @@
         inputBox.addEventListener('blur', () => {
             setTimeout(() => {
                 suggestionCont.style.cssText = "display: none;";
-            },100)
+            }, 100)
             inputBox.style.cssText = "border: 1px solid gray;"
         })
 
-        const searchFun = () => {
-            console.log('ok')
+
+        ////////////////     this part for receive details using inputBox.value    /////////////////
+
+        const searchFun = async () => {
+            nowName = inputBox.value;
+            console.log(nowName)
+            try {
+                let res = await fetch(`https://restcountries.com/v3.1/name/${nowName}`);
+                let data = await res.json();
+                // console.log(data);
+
+                let targetIndex = 0;  // hold The Actual Index is which the inputBox data present
+                for (index in data) {
+                    if (data[index].name.common == nowName) {
+                        targetIndex = index;                 // Some time api send multiple data for an input in array for retrieve the correct value i use it
+                        // console.log(data[index].name.common);
+                    }
+                }
+
+
+                console.log(`Country Name: ${data[targetIndex].name.common} (${data[targetIndex].cioc})`);
+                console.log(`Currency: ${data[targetIndex].currencies[Object.keys(data[targetIndex].currencies)[0]].name} - ${Object.keys(data[targetIndex].currencies)[0]}`);
+                console.log(`Capital: ${data[targetIndex].capital}`);
+                console.log(`Flag: ${data[targetIndex].flags.svg}`);
+                console.log(`Coat Of Arms: ${data[targetIndex].coatOfArms.svg}`);
+                console.log(`Population: ${data[targetIndex].population}`);
+                console.log(`Continents: ${data[targetIndex].continents[0]}`);
+                console.log(`Languages: ${Object.values(data[targetIndex].languages).join(', ')}`);
+                console.log(`ISD: ${Object.values(data[targetIndex].idd).join('')}`);
+                console.log(`ccTLD: ${data[targetIndex].tld[0]}`);
+
+
+                countryFlagImage.src = data[targetIndex].flags.svg
+                countryName.innerText = `Country Name: ${data[targetIndex].name.common} (${data[targetIndex].cioc})`;
+
+
+
+
+            }
+            catch (err) {
+                inputBox.value = '';
+                window.alert(`Don't find the Country "${nowName}"`);
+                console.log(err);
+            }
         }
         searchBtn.addEventListener('click', searchFun);
 
